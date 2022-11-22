@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>siin</div>
+  <div v-for="item in postList" class="posts">
+    <Post 
+      :created="item.created" 
+      :title="item.title" 
+      :body="item.body" 
+      :picture="item.picture"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Post from '@/components/Post.vue'
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
+    Post
+  },
+  data: {
+    postList: {}
+  },
+  computed: {
+    postListStore() {
+      this.postList = this.$store.dispatch("getPost")
+    }
   }
 }
 </script>
