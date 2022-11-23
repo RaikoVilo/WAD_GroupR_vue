@@ -92,7 +92,8 @@ export default {
   name: "password",
   methods: {
     checkPassword() {
-      if(document.getElementById("password").value.match(/(?=.*\d)(?=(.*[a-z]){2,})(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}/g)) {
+      
+      if(document.getElementById("password").value.match(/(?=.*\d)(?=(.*[a-z]){2,})(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}/g) && document.getElementById("password").value.length < 15 ) {
         window.location="index.html";
       }
       else {
