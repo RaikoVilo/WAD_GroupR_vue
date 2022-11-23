@@ -13,9 +13,9 @@
           </div>
           <div class="login_input_text">
               <input class="input_class" type="Email" id="email" placeholder="Email" name="email" required><br>
-              <input class="input_class" type="Password" id="password" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}" required><br>
-              <a id="submit" href="index.html">
-                <input type="submit" id="submit" value="Log in"/>
+              <input class="input_class" type="Password" id="password" placeholder="Password" name="password" required><br>
+              <a id="submit" >
+                <input @click="() => checkPassword()"  type="submit" id="submit" value="Log in"/>
               </a>
 
           </div>
@@ -85,3 +85,24 @@
     pointer-events: fill;
   }
 </style>
+
+<script>
+
+export default {
+  name: "password",
+  methods: {
+    checkPassword() {
+      if(document.getElementById("password").value.match(/(?=.*\d)(?=(.*[a-z]){2,})(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}/g)) {
+        window.location="index.html";
+      }
+      else {
+        alert("This password is not valid");
+      }
+    }
+  }
+}
+  
+
+</script>
+
+
