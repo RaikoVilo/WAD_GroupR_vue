@@ -1,5 +1,4 @@
 <template>
-  <div>siin</div>
   <div v-for="item in postList" :key="item.id" class="posts">
     <Post 
       :created="item.created" 
