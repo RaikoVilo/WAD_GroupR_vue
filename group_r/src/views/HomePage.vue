@@ -12,10 +12,11 @@
           :like="item.likes"
         />
       </div>
+      <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
     </div>
     <div class="right"></div>
   </div>
-  <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
+  
 </template>
 
 <script>
