@@ -1,12 +1,21 @@
 <template>
-  <div v-for="item in postList" :key="item.id" class="posts">
-    <Post 
-      :created="item.created" 
-      :title="item.title" 
-      :body="item.body" 
-      :picture="item.picture"
-    />
+  <div class="post-list-wrapper">
+    <div class="left"></div>
+    <div class="post-wrapper">
+      <div v-for="item in postList" :key="item.id" class="post">
+        <Post 
+          :id="item.id"
+          :created="item.created" 
+          :title="item.title" 
+          :body="item.body" 
+          :picture="item.picture"
+          :like="item.likes"
+        />
+      </div>
+    </div>
+    <div class="right"></div>
   </div>
+  <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
 </template>
 
 <script>
@@ -18,12 +27,45 @@ export default {
   },
   computed: {
     postList() {
-      console.log("siin")
       return this.$store.getters.getPosts
     }
   },
-  mounted() {
-    this.postList = this.postListStore
-  },
+  methods: {
+    resetLikes() {
+      this.$store.dispatch("resetLikesAct")
+    }
+  }
 }
 </script>
+
+<style scoped>
+
+.post-list-wrapper{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.post-wrapper {
+  width: 70%;
+}
+.left,
+.right {
+  width: 100%;
+  background-color: #886F61;
+  margin: 0 10px;
+  border-radius: 12px;
+}
+
+#reset-button {
+  background-color: rgb(0, 191, 255);
+  color: white;
+  border-radius: 12px;
+  border: unset;
+  padding: 0.5rem;
+  font-size: x-large;
+  width: fit-content;
+  margin: 10px;
+  cursor: pointer;
+}
+</style>

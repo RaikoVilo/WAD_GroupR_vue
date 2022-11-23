@@ -11,7 +11,7 @@ export default createStore({
         title: "Look at this cute cat!!!!",
         body: "This is my second test on creating post on my webside. This time with cute cat picture :D",
         picture: "https://styles.redditmedia.com/t5_2r5i1/styles/communityIcon_x4lqmqzu1hi81.jpg",
-        likes: 0
+        likes: 0,
       },
       {
         id: 1,
@@ -101,7 +101,6 @@ export default createStore({
   },
   getters: {
     getPosts: state => {
-      console.log("siin")
       var postList = state.posts.map(post => {
         return {
             id: post.id,
@@ -109,15 +108,16 @@ export default createStore({
             author: post.author,
             title: post.title,
             body: post.body,
-            picture: post.picture
+            picture: post.picture,
+            likes: post.likes
         }
       });
       return postList
     }
   },
   mutations: {
-    increaseLikes: state => {
-
+    increaseLikes: (state, payload) => {
+      state.posts[payload.id].likes += 1
     },
     resetLikes: state => {
       state.posts.forEach(post => {
@@ -126,11 +126,11 @@ export default createStore({
     }
   },
   actions: {
-    increaseLikesAct: act => {
-      act.commit("increaseLikes")
+    increaseLikesAct: (act, payload) => {
+        act.commit("increaseLikes", payload)
     },
     resetLikesAct: act => {
-      act.commit("resetLikes")
+        act.commit("resetLikes")
     }
   },
   modules: {
