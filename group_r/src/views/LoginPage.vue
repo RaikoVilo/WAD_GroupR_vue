@@ -31,7 +31,10 @@ export default {
   methods: {
     checkPassword() {
       
-      if(document.getElementById("password").value.match(/(?=.*\d)(?=(.*[a-z]){2,})(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}/g) && document.getElementById("password").value.length < 15 ) {
+      if(document.getElementById("password").value.match(/(?=.*\d)(?=(.*[a-z]){2,})(?=.*[A-Z])(?=.*[_])(?=.*[0-9]).{8,15}/g) && 
+        document.getElementById("password").value.length < 15 &&
+        document.getElementById("password").value[0] !== document.getElementById("password").value[0].toLowerCase()) {
+
         window.location="index.html";
       }
       else {
