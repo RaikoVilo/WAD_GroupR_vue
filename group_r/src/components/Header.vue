@@ -10,7 +10,7 @@
 
 <style scoped>
 header {
-  background-color: #5C4E46;
+  background-color: #886F61;
   border-radius: 20px;
 }
 

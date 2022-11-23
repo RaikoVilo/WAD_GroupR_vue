@@ -1,6 +1,6 @@
 <template>
   <div>siin</div>
-  <div v-for="item in postList" class="posts">
+  <div v-for="item in postList" :key="item.id" class="posts">
     <Post 
       :created="item.created" 
       :title="item.title" 
@@ -17,13 +17,14 @@ export default {
   components: {
     Post
   },
-  data: {
-    postList: {}
-  },
   computed: {
-    postListStore() {
-      this.postList = this.$store.dispatch("getPost")
+    postList() {
+      console.log("siin")
+      return this.$store.getters.getPosts
     }
-  }
+  },
+  mounted() {
+    this.postList = this.postListStore
+  },
 }
 </script>

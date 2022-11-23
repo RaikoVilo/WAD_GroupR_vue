@@ -25,15 +25,7 @@ export default {
     title: String,
     body: String,
     picture: String
-  },
-  methods: {
-    increaseLikes() {
-        this.$store.dispatch("increaseLikes")
-    },
-    resetLikes() {
-        this.$store.dispatch("resetLikes")
-    }
-  }
+ },
 }
 
 </script>
@@ -42,10 +34,10 @@ export default {
 .post {
     padding: 10px;
     height: auto;
-    border: 1px solid var(--brown);
+    border: 1px solid #5C4E46;
     border-radius: 20px;
     margin: 0 40px 15px 40px;
-    background-color: var(--beige);
+    background-color: #DFC2A3;
     justify-content: center;
     flex: 1;
     font-size: large;
