@@ -96,7 +96,7 @@ export default {
         window.location="index.html";
       }
       else {
-        alert("This password is not valid");
+        alert("This password is not valid \n The password needs to: \n * Be at least 8 and less than 15 chars \n * Include at least one uppercase alphabet character \n * Include at least two lowercase alphabet characters \n * Include at least one numeric value \n * Start with an uppercase alphabet \n * Include the character '_' ");
       }
     }
   }
