@@ -7,14 +7,14 @@ import auth from "../../server/auth"
 
 
     // beforeEnter: async (to, from, next) => {
-    //   let authResult = await auth.authenticated();
-    //   console.log(authResult)
-    //   if (!authResult) {
-    //       next('/login')
-    //   } else {
-    //       next();
-    //   }
-    // }
+      // let authResult = await auth.authenticated();
+      // console.log(authResult)
+      // if (!authResult) {
+        //   next('/login')
+       //} else {
+         //  next();
+       //}
+     //}
 
 const routes = [
   {
@@ -37,6 +37,13 @@ const routes = [
     name: 'editpost',
     component: EditPostPage
   },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignUpPage
+  },
+  
+  
 ]
 
 const router = createRouter({

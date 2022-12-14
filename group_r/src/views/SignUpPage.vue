@@ -13,11 +13,7 @@
             <input type="email" name="email" required v-model="email">
             <label for="password">Password</label>
             <input type="password" name="password" required v-model="password">
-          
-            <div class="log_in_button">
-              <button @click="LogIn" class="center">LogIn</button>
-              <button @click='this.$router.push("/signup")' class="center">Signup</button>
-            </div>  
+            <button @click="SignUp" class="SignUp">SignUp</button>
           </div>
       </div>
   </div>
@@ -28,22 +24,22 @@
 export default {
   name: "password",
   methods: {
-    LogIn() {
-      var data = {email: this.email, password: this.password};
-      fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {"Content-Type": "application/json",},
-      credentials: 'include', // Don't forget to specify this if you need cookies
-      body: JSON.stringify(data)})
-      .then((response) => response.json())
-      .then(() => {
-      console.log(data);
-      location.assign("/");})
-      .catch((e) => {
-      console.log("error");});
-      }
+    SignUp() {
+        var data = {email: this.email, password: this.password};
+        fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: 'include', // Don't forget to specify this if you need cookies
+        body: JSON.stringify(data)})
+        .then((response) => response.json())
+        .then(() => {
+        location.assign("/");})
+        .catch((e) => {
+        console.log("error");});
+    }
   }
 }
+  
 
 </script>
 
@@ -104,6 +100,3 @@ export default {
     pointer-events: fill;
   }
 </style>
-
-
-
