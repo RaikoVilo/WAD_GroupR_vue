@@ -5,14 +5,13 @@
       <div v-for="item in posts" :key="item.id" class="post">
         <Post 
           :id="item.id"
-          :created="item.created" 
           :title="item.title" 
-          :body="item.body" 
-          :picture="item.picture"
-          :like="item.likes"
+          :date="item.date" 
+          :body="item.body"
         />
       </div>
-      <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
+      <button id="add-post-button" @click="addPost">Add post</button>
+      <button id="delete-all-button" @click="deleteAll">Delete all</button>
     </div>
     <div class="right"></div>
   </div>
@@ -28,14 +27,17 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
     }
   },
   methods: {
     fetchPosts() {
       fetch('http://localhost:3000/api/posts')
         .then((response) => response.json())
-        .then((data) => (this.posts = data))
+        .then((data) => {
+          (this.posts = data)
+          console.log(data)
+        })
         .catch((err) => console.log(err.message))
     },
     deleteAll() {
@@ -44,7 +46,7 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       })
         .then((response) => {
-          this.$route.go()
+          this.$router.go()
         })
         .catch((err) => {
           console.log(err.message)
@@ -62,6 +64,9 @@ export default {
         .catch((e) => {
           console.log("log out error")
         })
+    },
+    addPost() {
+      this.$router.push('/add')
     }
   },
   mounted() {
@@ -79,17 +84,17 @@ export default {
 }
 
 .post-wrapper {
-  width: 70%;
+  width: 80%;
 }
 .left,
 .right {
-  width: 100%;
+  width: 20%;
   background-color: #886F61;
   margin: 0 10px;
   border-radius: 12px;
 }
 
-#reset-button {
+button {
   background-color: rgb(0, 191, 255);
   color: white;
   border-radius: 12px;
@@ -98,6 +103,8 @@ export default {
   font-size: x-large;
   width: fit-content;
   margin: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
   cursor: pointer;
 }
 </style>

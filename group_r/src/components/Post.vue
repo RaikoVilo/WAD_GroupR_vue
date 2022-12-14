@@ -1,37 +1,28 @@
 <template>
-  <div class="post post1">
+  <div @click="editPost" class="post post1">
     <div class="post-body">
-      <div class="post-profile">
-        <img id="profile-image" src="@/assets/profile_filler.png"/>
-        <span>{{ created }}</span>
-      </div>
+      <span>{{ date }}</span>
       <h1>{{ title }}</h1>
       <p>{{ body }}</p>
-      <img id="post-image" v-if="picture" :src="picture"/>
-      <img id="like-image" @click="() => increaseLikes()" src="@/assets/like.png"/>
-      <span>{{like}} likes</span>
     </div>
   </div>
 </template>
 
 <script>
-import { CLOSING } from 'ws';
+import router from '@/router';
 
 export default {
   name: 'Post',
   props: {
     id: Number,
-    author: String,
-    created: String,
     title: String,
     body: String,
-    picture: String,
-    like: Number
+    date: String,
   },
   methods: {
-    increaseLikes() {
-      this.$store.dispatch("increaseLikesAct", { id: this.id })
-    },
+    editPost() {
+      this.$router.push(`/edit/${this.id}`)
+    }
   }
 }
 

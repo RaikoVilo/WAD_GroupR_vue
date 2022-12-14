@@ -5,11 +5,11 @@
       <form>
         <div class="post-body-textarea">
           <label>Title</label>
-          <input id="title" name="title" cols="25" rows="8" placeholder="title" v-model="title" />
+          <textarea id="title" name="title" cols="25" rows="1" placeholder="title" v-model="title" ></textarea>
         </div>
         <div class="post-body-textarea">
           <label>Body</label>
-          <textarea id="textarea" name="textarea" cols="25" rows="8" placeholder="body" v-model="body" />
+          <textarea id="textarea" name="textarea" cols="25" rows="8" placeholder="body" v-model="body"></textarea>
         </div>
       </form>
       <button @click="addPost" type="button" id="add">Add</button>
@@ -28,10 +28,17 @@ export default {
   },
   methods: {
     addPost() {
+      const currentdate = new Date()
+      const newDate = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
       const payload = {
         title: this.title,
         body: this.body,
-        date: new Date(),
+        date: newDate,
       };
       console.log(payload)
       fetch("http://localhost:3000/api/posts", {
@@ -65,12 +72,17 @@ export default {
   background-color: #DFC2A3;
   border-radius: 12px;
   font-size: xx-large;
+  padding: 10px;
 }
 .post-body-textarea {
+  display: flex;
   align-items: flex-start;
+  align-self: start;
+  margin: 5px;
 }
+
 label {
-  padding: 0.5rem;
+  width: 100px;
 }
 textarea {
   resize: none;
@@ -82,6 +94,7 @@ button {
   border-radius: 12px;
   border: unset;
   font-size: x-large;
-  padding: 0.5rem;
+  padding: 10px;
+  margin: 5px;
 }
 </style>

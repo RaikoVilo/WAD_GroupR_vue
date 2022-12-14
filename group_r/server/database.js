@@ -25,7 +25,7 @@ const postList = `
 	    id SERIAL PRIMARY KEY,
 	    title VARCHAR(200) NOT NULL,
 	    body VARCHAR(200) NOT NULL,
-      date date NOT NULL
+      date VARCHAR(200) NOT NULL
     );`;
 
 const userTable =
