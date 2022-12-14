@@ -5,11 +5,7 @@ import AddPostPage from '../views/AddPostPage.vue'
 import EditPostPage from '../views/EditPostPage.vue'
 import auth from "../../server/auth"
 
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomePage,
+
     // beforeEnter: async (to, from, next) => {
     //   let authResult = await auth.authenticated();
     //   console.log(authResult)
@@ -19,6 +15,12 @@ const routes = [
     //       next();
     //   }
     // }
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomePage,
   },
   {
     path: '/login',
@@ -26,13 +28,13 @@ const routes = [
     component: LoginPage
   },
   {
-    path: '/add-post',
-    name: 'add post',
+    path: '/add',
+    name: 'addpost',
     component: AddPostPage
   },
   {
-    path: '/edit-post/:id',
-    name: 'add post',
+    path: '/edit/:id',
+    name: 'editpost',
     component: EditPostPage
   },
 ]

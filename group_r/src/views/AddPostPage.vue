@@ -4,26 +4,56 @@
       <label>Add post</label>
       <form>
         <div class="post-body-textarea">
+          <label>Title</label>
+          <input id="title" name="title" cols="25" rows="8" placeholder="title" v-model="title" />
+        </div>
+        <div class="post-body-textarea">
           <label>Body</label>
-          <textarea id="textarea" name="textarea" cols="25" rows="8" placeholder="textarea"></textarea>
+          <textarea id="textarea" name="textarea" cols="25" rows="8" placeholder="body" v-model="body" />
         </div>
       </form>
-      <button type="button" id="add">Add</button>
+      <button @click="addPost" type="button" id="add">Add</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  components: {
-  
-  },
-  computed: {
+  name: "AddPost",
+  data() {
+    return {
+      title: "",
+      body: "",
+    };
   },
   methods: {
-  }
-}
+    addPost() {
+      const payload = {
+        title: this.title,
+        body: this.body,
+        date: new Date(),
+      };
+      console.log(payload)
+      fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+      .then((response) => {
+        console.log(response.data);
+        this.$router.push("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error");
+      });
+    },
+  },
+};
 </script>
+
 
 <style scoped>
 .addPost-wrapper {

@@ -20,9 +20,10 @@ const startPool = async (query1, query2) => {
   }
 };
 
-const postTable = `
-    CREATE TABLE IF NOT EXISTS "posttable" (
+const postList = `
+    CREATE TABLE IF NOT EXISTS "postlist" (
 	    id SERIAL PRIMARY KEY,
+	    title VARCHAR(200) NOT NULL,
 	    body VARCHAR(200) NOT NULL,
       date date NOT NULL
     );`;
@@ -34,9 +35,9 @@ const userTable =
     password VARCHAR(200) NOT NULL
     );`
 
-startPool(postTable, userTable).then(result => {
+startPool(postList, userTable).then(result => {
   if (result) {
-      console.log('Tables "users" and  table "posttable" are created');
+      console.log('Tables "users" and  table "postlist" are created');
   }
 });
 
