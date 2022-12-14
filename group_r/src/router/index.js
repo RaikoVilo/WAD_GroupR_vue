@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import auth from "../../server/auth"
+import AddPostPage from '../views/AddPostPage.vue'
+import EditPostPage from '../views/EditPostPage.vue'
 
 const routes = [
   {
@@ -22,7 +24,17 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginPage
-  }
+  },
+  {
+    path: '/addPost',
+    name: 'Add Post',
+    component: AddPostPage
+  },
+  {
+    path: '/editPost',
+    name: 'Edit Post',
+    component: EditPostPage
+  },
 ]
 
 const router = createRouter({

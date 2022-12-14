@@ -13,6 +13,8 @@
         />
       </div>
       <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
+      <button id="add-post-button" @click="() => addPost()">Add post</button>
+      <button id="delete-all-button" @click="() => deleteAll()">Delete all</button>
     </div>
     <div class="right"></div>
   </div>
@@ -34,6 +36,12 @@ export default {
   methods: {
     resetLikes() {
       this.$store.dispatch("resetLikesAct")
+    },
+    addPost() {
+      this.$store.dispatch("addPostAct")
+    },
+    deleteAll() {
+      this.$store.dispatch("DeleteAllAct")
     }
   }
 }

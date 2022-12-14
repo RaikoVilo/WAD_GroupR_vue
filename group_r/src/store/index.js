@@ -123,14 +123,26 @@ export default createStore({
       state.posts.forEach(post => {
         post.likes = 0
       });
+    },
+    addPost: state =>  {
+
+    }, 
+    deleteAll: state => {
+
     }
   },
   actions: {
     increaseLikesAct: (act, payload) => {
-        act.commit("increaseLikes", payload)
+      act.commit("increaseLikes", payload)
     },
     resetLikesAct: act => {
-        act.commit("resetLikes")
+      act.commit("resetLikes")
+    },
+    addPostAct: act => {
+      act.commit("addPost")
+    },
+    deleteAllAct: act => {
+      act.commit("deleteAll")
     }
   },
   modules: {
