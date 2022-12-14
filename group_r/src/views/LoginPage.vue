@@ -5,18 +5,18 @@
               <label>Welcome to PostIt</label>
           </div>
           <div class="login_black_text">
-              <label>Login to your account</label>
+              <label>Login to your account <br> or <br> create a new one</label>
           </div>
 
           <div class="login_input_text">
-            <label for="email">Email</label>
-            <input type="email" name="email" required v-model="email">
-            <label for="password">Password</label>
-            <input type="password" name="password" required v-model="password">
+            <label for="email">Email</label><br>
+            <input type="email" name="email" required v-model="email"><br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" required v-model="password"><br>
           
             <div class="log_in_button">
-              <button @click="LogIn" class="center">LogIn</button>
-              <button @click='this.$router.push("/signup")' class="center">Signup</button>
+              <button @click="LogIn" class="center" id="submit" >LogIn</button>
+              <button @click='this.$router.push("/signup")' class="center" id="submit">Signup</button>
             </div>  
           </div>
       </div>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 export default {
   name: "password",
   methods: {
