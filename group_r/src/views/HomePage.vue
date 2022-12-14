@@ -2,7 +2,7 @@
   <div class="post-list-wrapper">
     <div class="left"></div>
     <div class="post-wrapper">
-      <div v-for="item in postList" :key="item.id" class="post">
+      <div v-for="item in posts" :key="item.id" class="post">
         <Post 
           :id="item.id"
           :created="item.created" 
@@ -26,15 +26,46 @@ export default {
   components: {
     Post
   },
-  computed: {
-    postList() {
-      return this.$store.getters.getPosts
+  data() {
+    return {
+      posts: []
     }
   },
   methods: {
-    resetLikes() {
-      this.$store.dispatch("resetLikesAct")
+    fetchPosts() {
+      fetch('http://localhost:3000/api/posts')
+        .then((response) => response.json())
+        .then((data) => (this.posts = data))
+        .catch((err) => console.log(err.message))
+    },
+    deleteAll() {
+      fetch('http://localhost:3000/api/posts', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then((response) => {
+          this.$route.go()
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+    },
+    logout() {
+      fetch('http://localhost:3000/auth/logout', {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("logged out")
+          location.assign("/")
+        })
+        .catch((e) => {
+          console.log("log out error")
+        })
     }
+  },
+  mounted() {
+    this.fetchPosts()
   }
 }
 </script>
