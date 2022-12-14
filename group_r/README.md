@@ -7,6 +7,8 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
+cd group_r
+npm run server
 npm run serve
 ```
 
