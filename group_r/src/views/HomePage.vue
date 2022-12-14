@@ -2,17 +2,16 @@
   <div class="post-list-wrapper">
     <div class="left"></div>
     <div class="post-wrapper">
-      <div v-for="item in postList" :key="item.id" class="post">
+      <div v-for="item in posts" :key="item.id" class="post">
         <Post 
           :id="item.id"
-          :created="item.created" 
           :title="item.title" 
-          :body="item.body" 
-          :picture="item.picture"
-          :like="item.likes"
+          :date="item.date" 
+          :body="item.body"
         />
       </div>
-      <button id="reset-button" @click="() => resetLikes()">Reset likes</button>
+      <button id="add-post-button" @click="addPost">Add post</button>
+      <button id="delete-all-button" @click="deleteAll">Delete all</button>
     </div>
     <div class="right"></div>
   </div>
@@ -26,15 +25,52 @@ export default {
   components: {
     Post
   },
-  computed: {
-    postList() {
-      return this.$store.getters.getPosts
+  data() {
+    return {
+      posts: [],
     }
   },
   methods: {
-    resetLikes() {
-      this.$store.dispatch("resetLikesAct")
+    fetchPosts() {
+      fetch('http://localhost:3000/api/posts')
+        .then((response) => response.json())
+        .then((data) => {
+          (this.posts = data)
+          console.log(data)
+        })
+        .catch((err) => console.log(err.message))
+    },
+    deleteAll() {
+      fetch('http://localhost:3000/api/posts', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then((response) => {
+          this.$router.go()
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+    },
+    logout() {
+      fetch('http://localhost:3000/auth/logout', {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("logged out")
+          location.assign("/")
+        })
+        .catch((e) => {
+          console.log("log out error")
+        })
+    },
+    addPost() {
+      this.$router.push('/add')
     }
+  },
+  mounted() {
+    this.fetchPosts()
   }
 }
 </script>
@@ -48,17 +84,17 @@ export default {
 }
 
 .post-wrapper {
-  width: 70%;
+  width: 80%;
 }
 .left,
 .right {
-  width: 100%;
+  width: 20%;
   background-color: #886F61;
   margin: 0 10px;
   border-radius: 12px;
 }
 
-#reset-button {
+button {
   background-color: rgb(0, 191, 255);
   color: white;
   border-radius: 12px;
@@ -67,6 +103,8 @@ export default {
   font-size: x-large;
   width: fit-content;
   margin: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
   cursor: pointer;
 }
 </style>
