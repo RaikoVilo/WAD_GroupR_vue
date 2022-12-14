@@ -22,20 +22,29 @@
 <script>
 
 export default {
-  name: "password",
+  name: "signup",
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
   methods: {
     SignUp() {
         var data = {email: this.email, password: this.password};
         fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        credentials: 'include', // Don't forget to specify this if you need cookies
-        body: JSON.stringify(data)})
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          credentials: 'include', // Don't forget to specify this if you need cookies
+          body: JSON.stringify(data)})
         .then((response) => response.json())
-        .then(() => {
-        location.assign("/");})
+        .then((data) => {
+          console.log(data)
+          this.$router.push("/")
+        })
         .catch((e) => {
-        console.log("error");});
+          console.log("error")
+        });
     }
   }
 }

@@ -2,6 +2,7 @@
   <div class="post-list-wrapper">
     <div class="left"></div>
     <div class="post-wrapper">
+      <button @click="logOut">Log out</button>
       <div v-for="item in posts" :key="item.id" class="post">
         <Post 
           :id="item.id"
@@ -52,18 +53,20 @@ export default {
           console.log(err.message)
         })
     },
-    logout() {
-      fetch('http://localhost:3000/auth/logout', {
-        credentials: "include",
+    logOut() {
+      fetch("http://localhost:3000/auth/logout", {
+          credentials: 'include',
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("logged out")
-          location.assign("/")
-        })
-        .catch((e) => {
-          console.log("log out error")
-        })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log('jwt removed');
+        this.$router.push("/login");
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log("error logout");
+      });
     },
     addPost() {
       this.$router.push('/add')
