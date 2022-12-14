@@ -23,26 +23,53 @@
 
 <script>
 import Post from '@/components/Post.vue'
+import { response } from 'express'
+import { CLOSING } from 'ws'
 
 export default {
   components: {
     Post
   },
-  computed: {
-    postList() {
-      return this.$store.getters.getPosts
+  date() {
+    return {
+      posts: [],
     }
   },
   methods: {
-    resetLikes() {
-      this.$store.dispatch("resetLikesAct")
-    },
-    addPost() {
-      this.$store.dispatch("addPostAct")
+    fetchPosts() {
+      fetch('http://localhost:3000/api/posts')
+        .then((response) => response.json())
+        .then((data) => (this.posts = data))
+        .catch((err) => console.log(err.message))
     },
     deleteAll() {
-      this.$store.dispatch("DeleteAllAct")
+      fetch('http://localhost:3000/api/posts', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then((response) => {
+          this.$route.go()
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+    },
+    logout() {
+      fetch('http://localhost:3000/auth/logout', {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("logged out")
+          location.assign("/")
+        })
+        .catch((e) => {
+          console.log("log out error")
+        })
     }
+  },
+  mounted() {
+    this.fetchPosts()
   }
 }
 </script>

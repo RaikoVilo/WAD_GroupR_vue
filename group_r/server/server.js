@@ -20,12 +20,12 @@ const generateJWT = (id) => {
   return jwt.sign({ id }, secret, { expiresIn: maxAge })
 }
 
-app.post('/api/posts', async(req, res) => {
+app.post('/api/posts/', async(req, res) => {
   try {
       console.log("a post request has arrived");
       const post = req.body;
       const newpost = await pool.query(
-          "INSERT INTO posttable(title, body) values ($1, $2, $3)    RETURNING*", [post.title, post.body]
+          "INSERT INTO posttable(title, body) values ($1, $2, $3)    RETURNING*", [post.title, post.body, post.date]
       );
       res.json(newpost);
   } catch (err) {

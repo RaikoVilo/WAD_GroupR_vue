@@ -10,28 +10,46 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomePage,
-    beforeEnter: async (to, from, next) => {
-      let authResult = await auth.authenticated();
-      console.log(authResult)
-      if (!authResult) {
-          next('/login')
-      } else {
-          next();
-      }
-  }
+    // beforeEnter: async (to, from, next) => {
+    //   let authResult = await auth.authenticated();
+    //   console.log(authResult)
+    //   if (!authResult) {
+    //       next('/login')
+    //   } else {
+    //       next();
+    //   }
+    // }
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginPage
+    component: LoginPage,
+    // beforeEnter: async (to, from, next) => {
+    //   let authResult = await auth.authenticated();
+    //   console.log(authResult)
+    //   if (!authResult) {
+    //       next('/login')
+    //   } else {
+    //       next();
+    //   }
+    // }
   },
   {
     path: '/addPost',
     name: 'Add Post',
-    component: AddPostPage
+    component: AddPostPage,
+    // beforeEnter: async (to, from, next) => {
+    //   let authResult = await auth.authenticated();
+    //   console.log(authResult)
+    //   if (!authResult) {
+    //       next('/login')
+    //   } else {
+    //       next();
+    //   }
+    // }
   },
   {
-    path: '/editPost',
+    path: '/editPost/:id',
     name: 'Edit Post',
     component: EditPostPage
   },
