@@ -5,51 +5,50 @@
               <label>Welcome to PostIt</label>
           </div>
           <div class="login_black_text">
-              <label>Login to your account <br> or <br> create a new one</label>
+              <label>Login to your account</label>
           </div>
 
           <div class="login_input_text">
-            <label for="email">Email</label><br>
-            <input type="email" name="email" required v-model="email"><br>
-            <label for="password">Password</label><br>
-            <input type="password" name="password" required v-model="password"><br>
-          
-            <div class="log_in_button">
-              <button @click="LogIn" class="center" id="submit" >LogIn</button>
-              <button @click='this.$router.push("/signup")' class="center" id="submit">Signup</button>
-            </div>  
+            <label for="email">Email</label>
+            <input type="email" name="email" required v-model="email">
+            <label for="password">Password</label>
+            <input type="password" name="password" required v-model="password">
+            <button @click="SignUp" class="SignUp">SignUp</button>
           </div>
       </div>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: "password",
+  name: "signup",
   data() {
     return {
       email: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
-    LogIn() {
-      var data = {email: this.email, password: this.password};
-      fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {"Content-Type": "application/json",},
-        credentials: 'include', // Don't forget to specify this if you need cookies
-        body: JSON.stringify(data)})
-      .then((response) => response.json())
-      .then(() => {
-        console.log(data);
-        this.$router.push("/")
-      })
-      .catch((e) => {
-        console.log("error");});
-      }
+    SignUp() {
+        var data = {email: this.email, password: this.password};
+        fetch("http://localhost:3000/auth/signup", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          credentials: 'include', // Don't forget to specify this if you need cookies
+          body: JSON.stringify(data)})
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          this.$router.push("/")
+        })
+        .catch((e) => {
+          console.log("error")
+        });
+    }
   }
 }
+  
 
 </script>
 
@@ -110,6 +109,3 @@ export default {
     pointer-events: fill;
   }
 </style>
-
-
-
